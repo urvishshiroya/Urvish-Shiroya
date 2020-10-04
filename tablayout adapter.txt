@@ -1,0 +1,57 @@
+In Main Activity
+
+	tabLayout.setupWithViewPager(viewPager);
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        adapter.addFragment(new ShoppingFrag(), "Shopping");
+        adapter.addFragment(new FoodFrag(), "Food");
+        adapter.addFragment(new TravelFrag(), "Travel");
+        viewPager.setAdapter(adapter);
+
+____________________________________________________________________________________________________________________
+
+In Andapter
+
+ 	public class ViewPagerAdapter extends FragmentPagerAdapter {
+    	ArrayList<String> arrayList = new ArrayList<>();
+    	List<Fragment> fragmentList = new ArrayList<>();
+
+   	 public ViewPagerAdapter(FragmentManager fm) {
+   	     super(fm);
+	
+   	 }
+
+   	 public void addFragment(Fragment fragment, String title) {
+   	     arrayList.add(title);
+   	     fragmentList.add(fragment);
+   	 }
+
+   	 public Fragment getItem(int position) {
+   	     Fragment fragment = null;
+		if (position == 0) {
+			fragment = new ShoppingFrag();
+		} else if (position == 1) {
+			fragment = new FoodFrag();
+		} else if (position == 2) {
+      	      		fragment = new TravelFrag();
+		}
+		return fragment;
+   	 }
+
+    	@Override
+    	public int getCount() {
+    	    return 3;
+    	}
+
+    public CharSequence getPageTitle(int position) {
+        String title = null;
+        if (position == 0) {
+            title = "Shopping";
+        }else if (position == 1){
+            title = "Food";
+        }else if (position == 2) {
+            title = "Travel";
+        }
+        return title;
+    }
+}

@@ -1,0 +1,18 @@
+Shared Praferances
+___________________________________
+
+Create Shared Prafrance...
+
+SharedPreferances sp = grtSharedPrafrance("myPref",MODE_PRIVET);
+Sharedepreferance.Editor editor = sp.edit();
+editor.putString("username",GetText with editText);
+editor.putString("password",GetText with editText);
+editor.commt();
+
+
+
+get Shared Preferances...
+
+Sharedprefrences sp = getSharedPreferences("myPref",MODE_PRIVET);
+String user = sp.getString("username",null);
+String pwed= sp.getString("password",null);

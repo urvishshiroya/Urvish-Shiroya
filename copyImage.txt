@@ -1,0 +1,4 @@
+Context context = v.getContext();
+                final android.text.ClipboardManager clipboardManager = (android.text.ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+                clipboardManager.setText(number[position]);
+                Toast.makeText(context, "Copied to clipboard", Toast.LENGTH_SHORT).show();

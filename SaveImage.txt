@@ -1,0 +1,46 @@
+private Bitmap getMainFrameBitmap(View view) {
+        Bitmap bitmap = Bitmap.createBitmap(view.getWidth(), view.getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        Drawable drawable = view.getBackground();
+        if (drawable != null){
+            drawable.draw(canvas);
+        }else {
+            canvas.drawColor(Color.WHITE);
+        }
+        view.draw(canvas);
+        return bitmap;
+    }
+
+
+ private void svBtn() {
+
+        OutputStream outputStream = null;
+        //BitmapDrawable drawable = (BitmapDrawable) imageView.getDrawable();
+        Bitmap bitmap = getMainFrameBitmap(relativeLayout);
+
+        File filePath = Environment.getExternalStorageDirectory();
+        File dir = new File(filePath.getAbsolutePath() + "/BestQuotes");
+        dir.mkdir();
+
+        String fName = String.format("%d.jpg",System.currentTimeMillis());
+        File outFile = new File(dir,fName);
+        try {
+            outputStream = new FileOutputStream(outFile);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
+        try {
+            outputStream.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            outputStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Toast.makeText(this, "Image Saved", Toast.LENGTH_SHORT).show();
+    }
+

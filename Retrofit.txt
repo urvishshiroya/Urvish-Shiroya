@@ -1,0 +1,68 @@
+[IN MainActivity]
+
+ApiInterface apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
+        final Call<List<DataModel>> listCall = apiInterface.getDataModel();
+
+        listCall.enqueue(new Callback<List<DataModel>>() {
+            @Override
+            public void onResponse(Call<List<DataModel>> call, Response<List<DataModel>> response) {
+                List<DataModel> dataModels = response.body();
+                MyAdapter myAdapter = new MyAdapter(MainActivity.this, dataModels);
+                LinearLayoutManager manager = new LinearLayoutManager(getApplicationContext(), RecyclerView.VERTICAL, false);
+                recyclerView.setLayoutManager(manager);
+                recyclerView.setAdapter(myAdapter);
+                Toast.makeText(MainActivity.this, "Success", Toast.LENGTH_SHORT).show();
+
+            }
+
+            @Override
+            public void onFailure(Call<List<DataModel>> call, Throwable t) {
+                Toast.makeText(MainActivity.this, "Error", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+_____________________________________________________________________________________________________________________________________
+
+[CREATE ApiClient Class]
+
+public static final String BASE_URL = "https://jsonplaceholder.typicode.com/";
+    public static Retrofit retrofit = null;
+
+    public static Retrofit getApiClient(){
+
+        if (retrofit == null){
+            retrofit = new Retrofit.Builder()
+                    .baseUrl(BASE_URL)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+        }
+
+        return retrofit;
+    }
+
+_____________________________________________________________________________________________________________________________________
+
+[CREATE ApiInterface (Interface)]
+
+ @GET("posts")
+    Call<List<DataModel>> getDataModel();
+
+_____________________________________________________________________________________________________________________________________
+
+[IN MyAdapter]
+
+    Activity activity;
+    List<DataModel> dataModels;
+
+DataModel model = dataModels.get(position);
+        String name = model.getName();
+        String capital = model.getCapital();
+        String flag = model.getFlag();
+        int population = model.getPopulation();
+        holder.name_tv.setText(name);
+        holder.name_tv.setTextColor(Color.RED);
+        holder.capital_tv.setText(capital);
+        holder.capital_tv.setTextColor(Color.GRAY);
+        holder.population_tv.setText(population+"");
+        holder.population_tv.setTextColor(Color.MAGENTA);
+        holder.flag_iv.setImageResource(R.mipmap.ic_launcher);l̥

@@ -1,0 +1,26 @@
+*Fragment is faster
+
+-static frag = xml
+dynamic frag = java
+
+-many fagment set in one activity
+but many activity not set in one fragment
+
+-in simple fragment is child
+activity is parent
+
+-complesury give a id else crash the app
+
+-oncreate view is our working area
+else all part erase
+
+-give all fragment name
+
+__________________________________
+*dynamic fragment
+
+make any layout
+give us id
+design in fragment activity
+store layoutinflater in view
+return view

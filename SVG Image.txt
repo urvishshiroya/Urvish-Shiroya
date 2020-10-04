@@ -1,0 +1,22 @@
+Depandency
+
+    implementation 'com.caverock:androidsvg-aar:1.4'
+    implementation 'com.android.volley:volley:1.1.1'
+
+_________________________________________________________________________
+In Adapter
+
+	GenericRequestBuilder<Uri, InputStream, SVG, PictureDrawable> requestBuilder = Glide.with(activity)
+                .using(Glide.buildStreamModelLoader(Uri.class, activity), InputStream.class)
+                .from(Uri.class)
+                .as(SVG.class)
+                .transcode(new SvgDrawableTranscoder(), PictureDrawable.class)
+                .sourceEncoder(new StreamEncoder())
+                .cacheDecoder(new FileToStreamDecoder<SVG>(new SvgDecoder()))
+                .decoder(new SvgDecoder())
+                .listener(new SvgSoftwareLayerSetter<Uri>());
+
+        requestBuilder.diskCacheStrategy(DiskCacheStrategy.NONE).load(Uri.parse(model.getFlag()))
+                .into(holder.flag_iv);
+
+_________________________________________________________________________
